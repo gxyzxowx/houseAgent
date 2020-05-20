@@ -1,0 +1,61 @@
+ul.house-list {
+  
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 0.88rem;
+  li.house-list-cell {
+    .top {
+      width: calc(100% - 0.48rem);
+      margin: 0.24rem;
+      border-radius: 0.3rem;
+      position: relative;
+      overflow: hidden;
+      height: 2.8rem;
+      .biao {
+        margin: 0.16rem;
+        padding: 0.07rem 0.16rem;
+        background: rgba(0, 0, 0, 0.4);
+        @include font(0.24rem, #fff);
+        border-radius: 0.25rem;
+        width: 1.26rem;
+      }
+      .house-warp {
+        @include rect(100%, 0.7rem);
+        background: rgba(0, 0, 0, 0.4);
+        padding: 0.2rem 0.24rem;
+        box-sizing: border-box;
+        @include font(0.24rem, #f3f3f3);
+        position: absolute;
+        bottom: 0;
+        text-align: left;
+      }
+    }
+    .bottom {
+      display: flex;
+      padding: 0 0.24rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.24rem;
+      .left {
+        display: flex;
+        @include font(0.3rem, #333);
+        .icon {
+          @include rectBg(0.24rem, 0.3rem, "~@/assets/img/where1.png");
+          margin-top: 0.05rem;
+          margin-right: 0.15rem;
+        }
+      }
+      .right {
+        background: linear-gradient(
+          90deg,
+          rgba(97, 164, 251, 0.8),
+          rgba(2, 124, 247, 0.8)
+        );
+        opacity: 0.6;
+        border-radius: 0.25rem;
+        @include font(0.24rem, #fff);
+        padding: 0.1rem 0.16rem;
+      }
+    }
+  }
+}
