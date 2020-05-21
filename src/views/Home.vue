@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 17:30:35
+ * @LastEditTime : 2020-05-21 10:24:14
  * @FilePath     : \agent\src\views\Home.vue
  * @Description  : 首页(3个切换)
 -->
@@ -89,10 +89,13 @@
 
 <script>
 export default {
+  beforeCreate () {
+    console.log('调用了')
+  },
   created () {
-    this.$router.push({
-      name: 'Hot'
-    })
+    // this.$router.push({
+    //   name: 'Hot'
+    // })
   },
   mounted () {
     // this.$router.push('/home/hot')

@@ -35,7 +35,7 @@ ul.house-list {
       padding: 0 0.24rem;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.24rem;
+     
       .left {
         display: flex;
         @include font(0.3rem, #333);
@@ -55,6 +55,18 @@ ul.house-list {
         border-radius: 0.25rem;
         @include font(0.24rem, #fff);
         padding: 0.1rem 0.16rem;
+      }
+    }
+    .yong{
+      display: flex;
+      align-items: center;
+      margin: .1rem 0 0.24rem .24rem;
+      .pic{
+        @include squareBg(.38rem, '~@/assets/img/yong.png');
+      }
+      .rate{
+        @include font(.28rem, #61A4FB);
+        margin-left: .2rem;
       }
     }
   }

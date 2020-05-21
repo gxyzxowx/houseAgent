@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:25:26
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 17:46:26
+ * @LastEditTime : 2020-05-21 14:46:52
  * @FilePath     : \agent\src\views\home\Hot.vue
  * @Description  : 首页-首页
 -->
@@ -167,7 +167,7 @@ header {
     </header>
 
     <ul class="house-list margintop">
-      <li class="house-list-cell">
+      <li class="house-list-cell" @click="openHouseDetail()">
         <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
           <div class="biao">优质楼盘</div>
           <div class="house-warp">观音桥商贸中心</div>
@@ -178,10 +178,14 @@ header {
             <div class="text">重庆市-重庆市-江北区</div>
           </div>
           <div class="right">023-88888888</div>
+        </div>
+        <div class="yong">
+          <div class="pic"></div>
+          <div class="rate">4 %</div>
         </div>
         <div class="com-line"></div>
       </li>
-      <li class="house-list-cell">
+      <li class="house-list-cell" @click="openHouseDetail()">
         <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
           <div class="biao">优质楼盘</div>
           <div class="house-warp">观音桥商贸中心</div>
@@ -192,10 +196,14 @@ header {
             <div class="text">重庆市-重庆市-江北区</div>
           </div>
           <div class="right">023-88888888</div>
+        </div>
+        <div class="yong">
+          <div class="pic"></div>
+          <div class="rate">4 %</div>
         </div>
         <div class="com-line"></div>
       </li>
-      <li class="house-list-cell">
+      <li class="house-list-cell" @click="openHouseDetail()">
         <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
           <div class="biao">优质楼盘</div>
           <div class="house-warp">观音桥商贸中心</div>
@@ -206,6 +214,10 @@ header {
             <div class="text">重庆市-重庆市-江北区</div>
           </div>
           <div class="right">023-88888888</div>
+        </div>
+        <div class="yong">
+          <div class="pic"></div>
+          <div class="rate">4 %</div>
         </div>
         <div class="com-line"></div>
       </li>
@@ -258,6 +270,11 @@ export default {
       this.$router.push({
         name: 'Search'
       }).catch(err => { console.log(err) })
+    },
+    openHouseDetail () {
+      this.$router.push({
+        name: 'HouseDetail'
+      })
     }
   }
 }

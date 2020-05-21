@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:55
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 11:44:34
+ * @LastEditTime : 2020-05-21 15:45:23
  * @FilePath     : \agent\src\views\home\User.vue
  * @Description  : 我的页面
 -->
@@ -37,13 +37,10 @@
         @include font(.32rem, #fff);
       }
     }
-    .right{
-      // @include squareBg(.32rem, #fff);
-    }
   }
   .user{
     .setting{
-      margin: .2rem;
+      margin: .25rem;
     }
   }
 
@@ -77,36 +74,36 @@
         <div class="name"> 注册/ 登录</div>
       </div>
       <div class="right">
-        <van-icon class="setting" name="setting-o" color="#fff" size=".55rem"/>
+        <van-icon class="setting" name="setting-o" color="#fff" size=".55rem" @click="linkToSetting"/>
       </div>
     </header>
     <main>
       <ul>
-        <li class="cell">
+        <li class="cell" @click="linkTo(0)">
           <div class="pic">
             <van-icon name="manager" class="cell" size=".8rem"/>
           </div>
           <div class="text">个人信息</div>
         </li>
-        <li class="cell">
+        <li class="cell" @click="linkTo(1)">
           <div class="pic">
             <van-icon name="friends" class="cell" size=".8rem"/>
           </div>
           <div class="text">我的客户</div>
         </li>
-        <li class="cell">
+        <li class="cell" @click="linkTo(2)">
           <div class="pic">
             <van-icon name="good-job"  class="cell" size=".8rem"/>
           </div>
           <div class="text">我的经纪人</div>
         </li>
-        <li class="cell">
+        <li class="cell" @click="linkTo(3)">
           <div class="pic">
             <van-icon name="add-square"  class="cell" size=".8rem"/>
           </div>
           <div class="text">我的邀请</div>
         </li>
-        <li class="cell">
+        <li class="cell" @click="linkTo(4)">
           <div class="pic">
             <van-icon name="like"  class="cell" size=".8rem"/>
           </div>
@@ -122,6 +119,24 @@ import { Icon } from 'vant'
 
 Vue.use(Icon)
 export default {
+  methods: {
+    linkTo (type) {
+      const pathName = [
+        'UserInfo',
+        'MyCustom',
+        'SharePhoster',
+        'MyInvite'
+      ]
+      this.$router.push({
+        name: pathName[type]
+      })
+    },
+    linkToSetting () {
+      this.$router.push({
+        name: 'Setting'
+      })
+    }
 
+  }
 }
 </script>

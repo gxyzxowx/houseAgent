@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:21:31
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 17:44:34
+ * @LastEditTime : 2020-05-21 14:47:45
  * @FilePath     : \agent\src\views\Search.vue
  * @Description  : 首页 -- 搜索
 -->
@@ -22,7 +22,7 @@
 </form>
 <div class="com-line"></div>
     <ul class="house-list">
-      <li class="house-list-cell">
+      <li class="house-list-cell" @click="openHouseDetail()">
         <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
           <div class="biao">优质楼盘</div>
           <div class="house-warp">观音桥商贸中心</div>
@@ -33,6 +33,10 @@
             <div class="text">重庆市-重庆市-江北区</div>
           </div>
           <div class="right">023-88888888</div>
+        </div>
+        <div class="yong">
+          <div class="pic"></div>
+          <div class="rate">4 %</div>
         </div>
         <div class="com-line"></div>
       </li>
@@ -60,6 +64,11 @@ export default {
     },
     onCancel () {
       console.log(2)
+    },
+    openHouseDetail () {
+      this.$router.push({
+        name: 'HouseDetail'
+      })
     }
   }
 }
