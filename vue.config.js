@@ -1,18 +1,18 @@
 /*
  * @Date         : 2019-12-11 16:50:10
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-09 11:49:48
- * @FilePath     : \kaoshi\vue.config.js
+ * @LastEditTime : 2020-05-22 15:17:39
+ * @FilePath     : \agent\vue.config.js
  */
 module.exports = {
   devServer: {
     proxy: {
-      '/api': {
-        target: 'http://ks.yuchaosheng.com/api',
+      '/index': {
+        target: 'http://fangchan.caimaomeng.com/index/index',
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          '^/api': ''
+          '^/index': ''
         }
       }
     }

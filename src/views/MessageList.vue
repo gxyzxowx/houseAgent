@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 14:40:06
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 14:50:49
+ * @LastEditTime : 2020-05-22 15:07:43
  * @FilePath     : \agent\src\views\MessageList.vue
  * @Description  : 系统消息和 客户状态变更
 -->
@@ -25,7 +25,7 @@
 <template>
   <div>
 <div class="title">
-  <div class="pic">
+  <div class="pic" @click="back">
     <van-icon name="arrow-left" color="#fff" size=".4rem"/>
   </div>
   <div class="text">{{title}}</div>
@@ -51,6 +51,11 @@ export default {
   },
   created () {
     this.title = this.$route.query.type ? '客户状态变更' : '系统消息'
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
   }
 }
 </script>

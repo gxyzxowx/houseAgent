@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 09:30:34
+ * @LastEditTime : 2020-05-22 15:34:04
  * @FilePath     : \agent\src\main.js
  * @Description  :
  */
@@ -13,10 +13,10 @@ import store from './store'
 // 引入rem.js
 import '@/assets/js/rem.js'
 // 引入公共函数
-import '@/assets/js/wr.js'
+import WR from '@/assets/js/wr.js'
 
 Vue.config.productionTip = false
-
+Vue.prototype.WR = WR
 new Vue({
   router,
   store,

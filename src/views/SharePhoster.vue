@@ -1,13 +1,14 @@
 <!--
  * @Date         : 2020-05-21 14:51:13
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-21 17:28:47
+ * @LastEditTime : 2020-05-22 15:06:31
  * @FilePath     : \agent\src\views\SharePhoster.vue
  * @Description  : 我的经纪人（分享海报）
 -->
 <style lang="scss" scoped>
 .sharephoster{
   @include rectBg(100%, 100%, '~@/assets/img/bg.png');
+  background-color: #fff;
   background-size: 100% auto;
   background-position: top;
   overflow: hidden;
@@ -47,13 +48,31 @@
     </div>
     <div class="btn">分享二维码</div>
     <div class="desc">
-      <div class="rule">邀请规则</div>
-      <div class="areadly">已邀请的好友</div>
+      <div class="rule" @click="openRule">邀请规则</div>
+      <div class="areadly" @click="linkToMyInvite">已邀请的好友</div>
     </div>
   </div>
 </template>
 <script>
+import { Dialog } from 'vant'
 export default {
+  data () {
+    return {
 
+    }
+  },
+  methods: {
+    linkToMyInvite () {
+      this.$router.push({
+        name: 'MyInvite'
+      })
+    },
+    openRule () {
+      Dialog.alert({
+        title: '邀请规则',
+        message: '这是邀请规则'
+      })
+    }
+  }
 }
 </script>

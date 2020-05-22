@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:34
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 11:19:30
+ * @LastEditTime : 2020-05-22 15:34:58
  * @FilePath     : \agent\src\views\home\Recomment.vue
  * @Description  : 推荐客户
 -->
@@ -108,7 +108,7 @@
   </ul>
 </div>
 
-<van-button type="info" class="wr-button">报备</van-button>
+<van-button type="info" class="wr-button" @click="sendData">报备</van-button>
 
   </div>
 </template>
@@ -155,6 +155,18 @@ export default {
       this.send.time = times
       const val = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + '点'
       return val
+    },
+    sendData () {
+      const data = this.send
+      console.log(this.send)
+      this.WR.post('/index/user_insert', {
+        name: data.name,
+        sex: data.sex,
+        phone: data.phone,
+        type: 1
+      }).then(rs => {
+        console.log(rs)
+      })
     }
   }
 }

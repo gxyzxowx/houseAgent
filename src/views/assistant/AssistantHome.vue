@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-22 11:27:33
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 12:34:41
+ * @LastEditTime : 2020-05-22 14:05:25
  * @FilePath     : \agent\src\views\assistant\AssistantHome.vue
  * @Description  : 案场助理
 -->
@@ -17,7 +17,7 @@ header {
   align-items: center;
 }
 .select {
-  width: 2.5rem;
+  width: 100%;
 }
 main{
   .main-title{
@@ -37,10 +37,10 @@ main{
     <header>
       <div class="select">
         <van-dropdown-menu>
-          <van-dropdown-item title="选择楼盘" v-model="value1" :options="option1" />
+          <van-dropdown-item v-model="houseVal" :options="option1" @change="changeHouse"/>
         </van-dropdown-menu>
       </div>
-      <div class="title">{{house}}</div>
+      <!-- <div class="title">{{house}}</div> -->
     </header>
     <main>
       <div class="main-title">客户信息</div>
@@ -83,22 +83,27 @@ Vue.use(Icon)
 export default {
   data () {
     return {
-      value1: 0,
+      houseVal: 0,
       option1: [
-        { text: '全部商品', value: 0 },
-        { text: '新款商品', value: 1 },
-        { text: '活动商品', value: 2 }
+        { text: '请选择楼盘', value: 0 },
+        { text: '观音桥商贸大厦', value: 1 },
+        { text: '解放碑商业大楼', value: 2 },
+        { text: '五里店区', value: 3 }
       ],
       house: ''
     }
   },
   methods: {
-    // 点击打开客户详情
+    // 点击打开案场助理的客户详情
     openCustomDetail () {
       this.$router.push({
-        name: 'CustomDetail',
+        name: 'AssistantDetail',
         query: 'abc'
       })
+    },
+    changeHouse (val, val1) {
+      console.log(val, val1)
+      this.house = val.name
     }
   }
 }

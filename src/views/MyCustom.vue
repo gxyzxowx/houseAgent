@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 14:54:10
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 11:51:51
+ * @LastEditTime : 2020-05-22 15:13:58
  * @FilePath     : \agent\src\views\MyCustom.vue
  * @Description  : 我的客户
 -->
@@ -25,6 +25,10 @@
         margin-right: .25rem;
         margin-bottom: .2rem;
         font-size: .28rem;
+        &.active{
+          border-color: $c;
+          color: $c;
+        }
       }
     }
   }
@@ -66,11 +70,11 @@
           <div class="status">
             <div class="title">业务状态</div>
             <ul class="list">
-              <li v-for="(item, index) in custom.yewu" :key="index" @click="change3(index, 0)">{{item}}</li>
+              <li v-for="(item, index) in custom.yewu" :key="index" :class="{active: index==currentIndex30}" @click="change3(index, 0)">{{item}}</li>
             </ul>
             <div class="title">报备状态</div>
             <ul class="list">
-              <li v-for="(item, index) in custom.baobei" :key="index" @click="change3(index, 1)">{{item}}</li>
+              <li v-for="(item, index) in custom.baobei" :key="index"  :class="{active: index==currentIndex31}" @click="change3(index, 1)">{{item}}</li>
             </ul>
           </div>
         </van-dropdown-item>
@@ -136,7 +140,10 @@ export default {
       custom: {
         yewu: ['报备', '到访', '认筹', '认购', '签约'],
         baobei: ['有效', '待确认', '拒收无效', '手工无效', '过期无效']
-      }
+      },
+      // 客户状态index
+      currentIndex30: -1,
+      currentIndex31: -1
     }
   },
   methods: {
@@ -150,6 +157,10 @@ export default {
     // 3客户状态
     change3 (item, type) {
       console.log(item, type)
+      this.currentIndex30 = -1
+      this.currentIndex31 = -1
+      const str = 'currentIndex3' + type
+      this[str] = item
       this.$refs.item3.toggle()
     },
     // 4状态更新
