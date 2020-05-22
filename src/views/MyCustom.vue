@@ -1,11 +1,12 @@
 <!--
  * @Date         : 2020-05-20 14:54:10
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 16:46:52
+ * @LastEditTime : 2020-05-22 11:51:51
  * @FilePath     : \agent\src\views\MyCustom.vue
  * @Description  : 我的客户
 -->
 <style lang="scss" scoped>
+@import '~@/assets/scss/customlist.scss';
 .select-bar{
   .status{
     padding: .24rem 0 .24rem .24rem;
@@ -28,64 +29,7 @@
     }
   }
 }
-ul.customlist{
-  li{
-    padding: .24rem;
-    background: #fff;
-    margin-bottom: .2rem;
-    .top{
-      display: flex;
-      justify-content: space-between;
-      .left{
-        .title{
-          display: flex;
-          align-items: center;
-          span.username{
-            font-size: .34rem;
-            font-weight: 700;
-          }
-          span.phone{
-            margin: 0 .24rem;
-            font-size: .3rem;
-          }
-          span.status{
-            background: #FFE8EA;
-            color:#FF4653;
-            padding: .08rem .2rem;
-            border-radius: .1rem;
-            font-size: .3rem;
-          }
-        }
-        .house{
-          @include font(.28rem, #888);
-          text-align: start;
-          margin: .2rem 0;
-        }
-      }
-      .right{
-        color:#FF4653;
-        font-size: .36rem;
-      }
-    }
-    .bottom{
-      display: flex;
-      box-sizing: border-box;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: .3rem;
-      color:#999;
-      .left{
-        font-size: .24rem;
-        text-align: start;
-      }
-      .right{
-        display: flex;
-        width: 1.5rem;
-        justify-content: space-between;
-      }
-    }
-  }
-}
+
 </style>
 
 <template>

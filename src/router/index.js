@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 09:37:32
+ * @LastEditTime : 2020-05-22 11:54:50
  * @FilePath     : \agent\src\router\index.js
  * @Description  :
  */
@@ -127,8 +127,22 @@ const routes = [
     // 我的 -- 我的收藏
     path: '/home/user/mystar',
     name: 'MyStar',
-    meta: { index: 14, title: '我的收藏' },
+    meta: { title: '我的收藏' },
     component: () => import('../views/MyStar.vue')
+  },
+  {
+    // 案场助理 -- 客户列表
+    path: '/assistant/home',
+    name: 'AssistantHome',
+    meta: { title: '我的收藏' },
+    component: () => import('../views/assistant/AssistantHome.vue')
+  },
+  {
+    // 案场助理 -- 客户详情
+    path: '/assistant/detail',
+    name: 'AssistantDetail',
+    meta: { title: '我的收藏' },
+    component: () => import('../views/assistant/AssistantDetail.vue')
   }
 ]
 
