@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 16:26:27
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 17:19:18
+ * @LastEditTime : 2020-05-21 17:42:42
  * @FilePath     : \agent\src\views\CustomDetail.vue
  * @Description  : 客户详情
 -->
@@ -105,7 +105,7 @@
       <div class="right">
         <div class="icons">
           <van-icon name="edit" @click="linkToRecoment()" />
-          <van-icon name="qr" />
+          <van-icon name="qr" @click="linkToSeeCode()" />
           <van-icon name="phone-o" />
         </div>
       </div>
@@ -162,6 +162,12 @@ export default {
     linkToRecoment () {
       this.$router.push({
         name: 'Recomment',
+        query: 'abc'
+      })
+    },
+    linkToSeeCode () {
+      this.$router.push({
+        name: 'SeeCode',
         query: 'abc'
       })
     }

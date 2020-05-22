@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 17:04:54
+ * @LastEditTime : 2020-05-22 09:20:02
  * @FilePath     : \agent\src\App.vue
  * @Description  :  入口
 -->
@@ -24,3 +24,10 @@
 }
 
 </style>
+<script>
+export default {
+  beforeCreate () {
+    console.log('app before')
+  }
+}
+</script>

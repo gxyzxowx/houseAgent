@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:34
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-20 11:57:38
+ * @LastEditTime : 2020-05-22 11:19:30
  * @FilePath     : \agent\src\views\home\Recomment.vue
  * @Description  : 推荐客户
 -->
@@ -83,10 +83,18 @@
 
   <van-field v-model="send.phone" required type="tel" label="手机号" />
 
-   <van-field v-model="send.time"  placeholder="请输入预计到访时间" label=
-  " 预计到访时间"/>
+   <van-field v-model="timeDisplay"  placeholder="请选择预计到访时间" label=
+  " 预计到访时间"  @click.stop="showTime = !showTime"/>
 </van-cell-group>
+
     </div>
+    <van-datetime-picker v-show="showTime"
+  v-model="currentDate"
+  type="datetime"
+  title="精确到小时"
+  @confirm="selectTime"
+  @cancel="showTime = false"
+/>
 <div class="bottom">
   <div class="title">
     <div class="text">意向楼盘</div>
@@ -101,12 +109,14 @@
 </div>
 
 <van-button type="info" class="wr-button">报备</van-button>
+
   </div>
 </template>
 <script>
 import Vue from 'vue'
-import { Field, CellGroup, RadioGroup, Radio, Button } from 'vant'
+import { Field, CellGroup, RadioGroup, Radio, Button, DatetimePicker } from 'vant'
 
+Vue.use(DatetimePicker)
 Vue.use(Button)
 Vue.use(Radio)
 Vue.use(RadioGroup)
@@ -120,12 +130,31 @@ export default {
         phone: '',
         sex: '1',
         time: ''
-      }
+      },
+      showTime: false,
+      timeDisplay: '',
+      currentDate: new Date()
     }
   },
   methods: {
     addHouse () {
       this.$router.push({ name: 'RecommentAdd' })
+    },
+    selectTime (val, yo) {
+      console.log(typeof val)
+      this.showTime = false
+
+      const lastV = this.dateFormat(val)
+      this.timeDisplay = lastV
+      console.log(lastV)
+    },
+    dateFormat (data) {
+      const d = new Date(data)
+      // console.log(d.getTime())
+      const times = d.getTime()
+      this.send.time = times
+      const val = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + '点'
+      return val
     }
   }
 }

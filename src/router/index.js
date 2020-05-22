@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-21 15:44:44
+ * @LastEditTime : 2020-05-22 09:37:32
  * @FilePath     : \agent\src\router\index.js
  * @Description  :
  */
@@ -82,6 +82,13 @@ const routes = [
     component: () => import('../views/CustomDetail.vue')
   },
   {
+    // 客户详情 -- 带看二维码
+    path: '/home/customdetail/seecode',
+    name: 'SeeCode',
+    meta: { title: '带看二维码' },
+    component: () => import('../views/SeeCode.vue')
+  },
+  {
     // 楼盘详情
     path: '/home/housedetail',
     name: 'HouseDetail',
@@ -115,6 +122,13 @@ const routes = [
     name: 'MyInvite',
     meta: { index: 12, title: '我的邀请' },
     component: () => import('../views/MyInvite.vue')
+  },
+  {
+    // 我的 -- 我的收藏
+    path: '/home/user/mystar',
+    name: 'MyStar',
+    meta: { index: 14, title: '我的收藏' },
+    component: () => import('../views/MyStar.vue')
   }
 ]
 

@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:55
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-21 15:45:23
+ * @LastEditTime : 2020-05-22 09:38:03
  * @FilePath     : \agent\src\views\home\User.vue
  * @Description  : 我的页面
 -->
@@ -15,7 +15,7 @@
 }
   header{
     height: 3.5rem;
-    background: -webkit-gradient(linear, 100% 0%, 0% 100%, from(#027CF7), to(#0280FF), color-stop(.8,#59A7FF));
+   background:linear-gradient(90deg,rgba(2,124,247,1),rgba(97,164,251,1));
     display: flex;
     justify-content: space-between;
     .left{
@@ -58,7 +58,7 @@
         width: 24.9%;
         // height: 1.8rem;
       .cell{
-        color: rgb(35, 137, 255);
+        color: $c;
       }
     }
     }
@@ -125,7 +125,8 @@ export default {
         'UserInfo',
         'MyCustom',
         'SharePhoster',
-        'MyInvite'
+        'MyInvite',
+        'MyStar'
       ]
       this.$router.push({
         name: pathName[type]

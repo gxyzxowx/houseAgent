@@ -1,8 +1,8 @@
 // 默认字体颜色#666666
 // 默认常用背景色
-$c: #f7f7f7;
+$c: #519DFA;
 // 默认常用主题色
-$c-style: #0D5FF4;
+$c-a:#FF4653;
 // 默认字体大小24px
 $f: .24rem;
 
@@ -36,6 +36,7 @@ $img-path: '../../image';
   background-image: url($url);
   background-size: 100% 100%;
   background-position: center;
+  background-repeat: no-repeat;
 }
 // 背景图
 @mixin bg($url){
