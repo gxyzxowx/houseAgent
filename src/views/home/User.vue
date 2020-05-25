@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:55
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 09:38:03
+ * @LastEditTime : 2020-05-25 11:21:42
  * @FilePath     : \agent\src\views\home\User.vue
  * @Description  : 我的页面
 -->
@@ -14,16 +14,15 @@
   background-color: #f7f7f7;
 }
   header{
-    height: 3.5rem;
-   background:linear-gradient(90deg,rgba(2,124,247,1),rgba(97,164,251,1));
+    @include rectBg(100%, 3.5rem, '../../assets/img/ubanner.png');
     display: flex;
     justify-content: space-between;
     .left{
       display: flex;
-      margin:.6rem;
+      margin:.57rem;
       align-items: center;
       .pic{
-        @include square(1.4rem);
+        @include square(1.41rem);
         background-color: #eee;
         border-radius: 50%;
         overflow: hidden;
@@ -34,32 +33,56 @@
         }
       }
       .name{
-        @include font(.32rem, #fff);
+        @include font(.34rem, #fff);
       }
     }
   }
   .user{
     .setting{
-      margin: .25rem;
+      @include rectBg(.32rem, .36rem, '../../assets/img/setting.png');
+      margin: .32rem;
     }
   }
 
   main{
-    margin-top: .25rem;
-  background: #fff;
+    margin: .25rem .3rem;
     ul {
-       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      li{
+      li.cell{
+        background: #fff;
+        @include rect(100%, 1.3rem);
+        border-radius: .1rem;
         display: flex;
-        flex-direction: column;
-        padding: .25rem 0;
-        width: 24.9%;
-        // height: 1.8rem;
-      .cell{
-        color: $c;
-      }
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: .2rem;
+        .left{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .pic{
+            @include squareBg(.82rem, '../../assets/img/u1.png');
+            margin: 0 .25rem;
+          }
+          .text{
+            @include font(.3rem, #333);
+          }
+        }
+        .right{
+          margin-right: .25rem;
+          @include rectBg(.16rem, .3rem, '../../assets/img/right.png');
+        }
+        &:nth-of-type(2) .pic{
+          @include squareBg(.82rem, '../../assets/img/u2.png');
+        }
+        &:nth-of-type(3) .pic{
+          @include squareBg(.82rem, '../../assets/img/u3.png');
+        }
+        &:nth-of-type(4) .pic{
+          @include squareBg(.82rem, '../../assets/img/u4.png');
+        }
+        &:nth-of-type(5) .pic{
+          @include squareBg(.82rem, '../../assets/img/u5.png');
+        }
     }
     }
   }
@@ -74,50 +97,51 @@
         <div class="name"> 注册/ 登录</div>
       </div>
       <div class="right">
-        <van-icon class="setting" name="setting-o" color="#fff" size=".55rem" @click="linkToSetting"/>
+        <div class="setting" @click="linkToSetting"></div>
       </div>
     </header>
     <main>
       <ul>
         <li class="cell" @click="linkTo(0)">
-          <div class="pic">
-            <van-icon name="manager" class="cell" size=".8rem"/>
+          <div class="left">
+            <div class="pic"></div>
+            <div class="text">个人信息</div>
           </div>
-          <div class="text">个人信息</div>
+          <div class="right"></div>
         </li>
         <li class="cell" @click="linkTo(1)">
-          <div class="pic">
-            <van-icon name="friends" class="cell" size=".8rem"/>
+          <div class="left">
+            <div class="pic"></div>
+            <div class="text">我的客户</div>
           </div>
-          <div class="text">我的客户</div>
+          <div class="right"></div>
         </li>
         <li class="cell" @click="linkTo(2)">
-          <div class="pic">
-            <van-icon name="good-job"  class="cell" size=".8rem"/>
+          <div class="left">
+            <div class="pic"></div>
+            <div class="text">我的经纪人</div>
           </div>
-          <div class="text">我的经纪人</div>
+          <div class="right"></div>
         </li>
         <li class="cell" @click="linkTo(3)">
-          <div class="pic">
-            <van-icon name="add-square"  class="cell" size=".8rem"/>
+          <div class="left">
+            <div class="pic"></div>
+            <div class="text">我的邀请</div>
           </div>
-          <div class="text">我的邀请</div>
+          <div class="right"></div>
         </li>
         <li class="cell" @click="linkTo(4)">
-          <div class="pic">
-            <van-icon name="like"  class="cell" size=".8rem"/>
+          <div class="left">
+            <div class="pic"></div>
+            <div class="text">楼盘收藏</div>
           </div>
-          <div class="text">楼盘收藏</div>
+          <div class="right"></div>
         </li>
       </ul>
     </main>
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import { Icon } from 'vant'
-
-Vue.use(Icon)
 export default {
   methods: {
     linkTo (type) {

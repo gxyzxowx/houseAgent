@@ -1,101 +1,126 @@
 <!--
  * @Date         : 2020-05-20 16:26:27
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-21 17:42:42
+ * @LastEditTime : 2020-05-25 11:44:51
  * @FilePath     : \agent\src\views\CustomDetail.vue
  * @Description  : 客户详情
 -->
 <style lang="scss" scoped>
-  header{
-    height: 2rem;
+header {
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  background: #fff;
+  margin-bottom: 0.25rem;
+  box-shadow: 0 0.05rem 0.05rem #ededed;
+  .left {
     display: flex;
-    justify-content: space-between;
-    padding:.25rem;
-    box-sizing: border-box;
-    background: #fff;
-    margin-bottom: .25rem;
-    box-shadow: 0 .05rem .05rem #ededed;
-    .left{
-      display: flex;
-      .pic{
-        @include square(1.4rem);
-        background-color: #eee;
-        border-radius: 50%;
-        overflow: hidden;
-        img{
-          @include square(100%);
-        }
-      }
-      .info{
-        @include font(.32rem, #333);
-        margin-left: .2rem;
-        .name{
-          margin-bottom: .2rem;
-        }
+    .pic {
+      @include square(1.4rem);
+      background-color: #eee;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        @include square(100%);
       }
     }
-    .right{
-      .icons{
-        display: flex;
-        width: 1.8rem;
-        justify-content: space-between;
-        color:#E02D36;
-        font-size: .4rem;
+    .info {
+      @include font(0.32rem, #333);
+      margin-left: 0.2rem;
+      .name {
+        margin-bottom: 0.2rem;
       }
     }
   }
-  .line{
-      padding: .2rem .24rem;
-      font-size: .3rem;
+  .right {
+    .icons {
+      display: flex;
+      width: 1.8rem;
+      justify-content: space-between;
+      color: #e02d36;
+      font-size: 0.4rem;
+    }
+  }
+}
+.line {
+  padding: 0.2rem 0.24rem;
+  font-size: 0.3rem;
+  text-align: start;
+  background-color: #fff;
+  box-shadow: 0 0.05rem 0.05rem #ededed;
+}
+.current-status{
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1rem;
+  box-sizing: border-box;
+  color: #999;
+  margin-bottom: .2rem;
+  .icon{
+    font-size: .7rem;
+     &.active{
+    color:$c-a;
+  }
+  }
+  .text{
+    color:#333;
+  }
+  .mid-line{
+    width: 2.5rem;
+    height: 2px;
+    background-color: #999;
+  }
+}
+main {
+  background: #fff;
+  .title {
+    display: flex;
+    align-items: center;
+    font-size: 0.32rem;
+    padding: 0.2rem 0.24rem;
+    .text {
+      margin-left: 0.2rem;
+    }
+  }
+  ul.list {
+    li {
+      padding: 0.25rem;
+      font-size: 0.28rem;
       text-align: start;
-      background-color: #fff;
-      box-shadow: 0 .05rem .05rem #ededed;
-    }
-  main{
-    background: #fff;
-    .title{
-      display: flex;
-      align-items: center;
-      font-size: .32rem;
-      padding: .2rem .24rem;
-      .text{
-        margin-left: .2rem;
-      }
-    }
-    ul.list{
-      li{
-        padding:.25rem;
-        font-size: .28rem;
-        text-align: start;
-        line-height: .4rem;
-        .top{
-          display: flex;
-          align-items: center;
-          .time{
-            margin: 0 .2rem;
-          }
-          .biao{
-             background: #FFE8EA;
-            color:#FF4653;
-            padding: .03rem .2rem;
-            border-radius: .05rem;
-            font-size: .24rem;
-            &.blue{
-               color: rgb(35, 137, 255);
-               background: rgb(215, 228, 253);
-            }
+      line-height: 0.4rem;
+      .top {
+        display: flex;
+        align-items: center;
+        .time {
+          margin: 0 0.2rem;
+        }
+        .biao {
+          background: #ffe8ea;
+          color: #ff4653;
+          padding: 0.03rem 0.2rem;
+          border-radius: 0.05rem;
+          font-size: 0.24rem;
+          &.blue {
+            color: rgb(35, 137, 255);
+            background: rgb(215, 228, 253);
           }
         }
       }
     }
   }
+}
 </style>
 <template>
   <div>
     <header>
       <div class="left">
         <div class="pic">
-          <img src="" alt="">
+          <img src alt />
         </div>
         <div class="info">
           <div class="name">曾迪迪（女）</div>
@@ -110,18 +135,29 @@
         </div>
       </div>
     </header>
-<div class="line">项目： 观音桥商贸中心</div>
-<div class="com-line"></div>
+    <div class="line">项目： 观音桥商贸中心</div>
+    <div class="current-status">
+      <div class="baobei">
+        <van-icon name="checked"  class="icon active"/>
+        <div class="text">报备</div>
+      </div>
+      <div class="mid-line"></div>
+      <div class="chengjiao">
+        <van-icon name="checked"  class="icon"/>
+        <div class="text">成交</div>
+      </div>
+    </div>
+    <div class="com-line"></div>
     <main>
       <div class="title">
-        <van-icon name="label-o" />
+        <van-icon name="label-o"/>
         <div class="text">报备信息</div>
       </div>
       <div class="com-line"></div>
       <ul class="list">
         <li>
           <div class="top">
-            <van-icon name="underway-o" size=".4rem"/>
+            <van-icon name="underway-o" size=".4rem" />
             <div class="time">2020-05-20 05:22:12</div>
             <div class="biao">防截客锁定中</div>
           </div>
@@ -131,7 +167,7 @@
             <p>已提交客户资料，开发商审核中。放截客锁定中，请耐心等待。</p>
           </div>
         </li>
-                <li>
+        <li>
           <div class="top">
             <van-icon name="underway-o" size=".4rem" />
             <div class="time">2020-05-20 05:22:12</div>
@@ -154,9 +190,7 @@ import { Icon } from 'vant'
 Vue.use(Icon)
 export default {
   data () {
-    return {
-
-    }
+    return {}
   },
   methods: {
     linkToRecoment () {
