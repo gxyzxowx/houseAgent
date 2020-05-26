@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:25:26
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-21 14:46:52
+ * @LastEditTime : 2020-05-26 15:01:35
  * @FilePath     : \agent\src\views\home\Hot.vue
  * @Description  : 首页-首页
 -->
@@ -141,8 +141,8 @@ header {
         <div class="swiper">
           <div v-swiper:mySwiper="swiperOption">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" :key="banner" v-for="banner in images">
-                <img :src="banner" />
+              <div class="swiper-slide"  @click.stop="swiperGo(type, floor_id)" :key="index" v-for="(banner, index) in banner_list">
+                <img :src="banner.image"/>
               </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -151,82 +151,50 @@ header {
       </div>
       <!-- 三个bar -->
       <div class="bar">
-        <div class="bar-cell" @click="linkTo(0)">
-          <div class="pic"></div>
-          <div class="text">推荐客户</div>
-        </div>
-        <div class="bar-cell" @click="linkTo(1)">
-          <div class="pic"></div>
-          <div class="text">我的客户</div>
-        </div>
-        <div class="bar-cell" @click="linkTo(2)">
-          <div class="pic"></div>
-          <div class="text">我的消息</div>
+        <div v-for="(item, index) in navigation_list" :key="index" class="bar-cell" @click="linkTo(index)">
+          <div class="pic" :style="{backgroundImage:'url(' + item.icon +')',backgroundSize:'cover'}"></div>
+          <div class="text">{{item.name}}</div>
         </div>
       </div>
     </header>
 
     <ul class="house-list margintop">
-      <li class="house-list-cell" @click="openHouseDetail()">
-        <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
+      <van-list
+  v-model="loading"
+  :finished="finished"
+  offset= 1
+  finished-text="没有更多了"
+  @load="getFloorList"
+>
+      <li v-for="(item) in dataList" :key="item.floor_id" class="house-list-cell" @click="openHouseDetail(item.floor_id)">
+        <div class="top" :style="{backgroundImage:'url(' + item.img +')',backgroundSize:'cover'}">
           <div class="biao">优质楼盘</div>
-          <div class="house-warp">观音桥商贸中心</div>
+          <div class="house-warp">{{item.name}}</div>
         </div>
         <div class="bottom">
           <div class="left">
             <div class="icon"></div>
-            <div class="text">重庆市-重庆市-江北区</div>
+            <div class="text">{{item.map_address}}</div>
           </div>
-          <div class="right">023-88888888</div>
+          <div class="right">{{item.phone}}</div>
         </div>
         <div class="yong">
           <div class="pic"></div>
-          <div class="rate">4 %</div>
+          <div class="rate">{{item.commission}}</div>
         </div>
         <div class="com-line"></div>
       </li>
-      <li class="house-list-cell" @click="openHouseDetail()">
-        <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
-          <div class="biao">优质楼盘</div>
-          <div class="house-warp">观音桥商贸中心</div>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="icon"></div>
-            <div class="text">重庆市-重庆市-江北区</div>
-          </div>
-          <div class="right">023-88888888</div>
-        </div>
-        <div class="yong">
-          <div class="pic"></div>
-          <div class="rate">4 %</div>
-        </div>
-        <div class="com-line"></div>
-      </li>
-      <li class="house-list-cell" @click="openHouseDetail()">
-        <div class="top" :style="{backgroundImage:'url(' + images[0] +')',backgroundSize:'cover'}">
-          <div class="biao">优质楼盘</div>
-          <div class="house-warp">观音桥商贸中心</div>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="icon"></div>
-            <div class="text">重庆市-重庆市-江北区</div>
-          </div>
-          <div class="right">023-88888888</div>
-        </div>
-        <div class="yong">
-          <div class="pic"></div>
-          <div class="rate">4 %</div>
-        </div>
-        <div class="com-line"></div>
-      </li>
+      </van-list>
     </ul>
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import { List } from 'vant'
 import { directive } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+
+Vue.use(List)
 export default {
   data () {
     return {
@@ -245,13 +213,21 @@ export default {
           stopOnLastSlide: false,
           disableOnInteraction: false // 滑动不会失效
         }
-        // ...
-      }
+      },
+      // 三个bar
+      navigation_list: [],
+      // 轮播图列表
+      banner_list: [],
+      // 楼盘信息
+      dataList: [],
+      loading: false,
+      finished: false,
+      page: 0
     }
   },
   mounted () {
-    // console.log('Current Swiper instance object', this.mySwiper)
-    // this.mySwiper.slideTo(3, 1000, false)
+    this.getData()
+    // this.getFloorList()
   },
 
   directives: {
@@ -271,10 +247,51 @@ export default {
         name: 'Search'
       }).catch(err => { console.log(err) })
     },
-    openHouseDetail () {
+    openHouseDetail (id) {
       this.$router.push({
-        name: 'HouseDetail'
+        name: 'HouseDetail',
+        query: {
+          floor_id: id
+        }
       })
+    },
+    // 获取首页数据
+    getData () {
+      this.WR.post('/home/getHomePageData', {})
+        .then(rs => {
+          // console.log(rs)
+          if (rs.code === 0) {
+            this.navigation_list = rs.data.navigation_list
+            this.banner_list = rs.data.banner_list
+            // console.log(this.navigation_list)
+          }
+        })
+    },
+    // 获取楼盘列表
+    getFloorList () {
+      this.page++
+      console.log(this.page)
+      this.WR.post('/Floor_List/getFloorList', {
+        page: this.page,
+        row: 1
+      })
+        .then(rs => {
+          console.log(rs)
+          if (rs.code === 0) {
+            this.dataList = this.dataList.concat(rs.data.data_list)
+          }
+          this.loading = false
+          if (rs.data.total <= this.dataList.length) {
+            this.finished = true
+          }
+        })
+    },
+    swiperGo (type, id) {
+      console.log(type)
+      if (type === 1) {
+        return
+      }
+      this.openHouseDetail(id)
     }
   }
 }

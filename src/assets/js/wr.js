@@ -1,13 +1,13 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 15:19:05
+ * @LastEditTime : 2020-05-26 11:31:34
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'
 import QS from 'qs'
 // const BASE_URL = 'http://fangchan.caimaomeng.com/index'
-const BASE_URL = '/index'
+const BASE_URL = '/agent'
 const obj = {
   // 封装axios
   get (url, params) {

@@ -1,18 +1,18 @@
 /*
  * @Date         : 2019-12-11 16:50:10
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 15:17:39
+ * @LastEditTime : 2020-05-26 11:35:46
  * @FilePath     : \agent\vue.config.js
  */
 module.exports = {
   devServer: {
     proxy: {
-      '/index': {
-        target: 'http://fangchan.caimaomeng.com/index/index',
+      '/agent': {
+        target: 'http://fangchan.caimaomeng.com/agent',
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          '^/index': ''
+          '^/agent': ''
         }
       }
     }

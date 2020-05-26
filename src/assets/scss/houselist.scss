@@ -1,7 +1,8 @@
 ul.house-list {
   
   background: #fff;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.88rem;
   li.house-list-cell {
     .top {
