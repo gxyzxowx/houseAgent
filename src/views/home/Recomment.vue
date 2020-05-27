@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:34
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 15:34:58
+ * @LastEditTime : 2020-05-27 09:21:18
  * @FilePath     : \agent\src\views\home\Recomment.vue
  * @Description  : 推荐客户
 -->
@@ -114,7 +114,9 @@
 </template>
 <script>
 import Vue from 'vue'
-import { Field, CellGroup, RadioGroup, Radio, Button, DatetimePicker } from 'vant'
+import { Field, CellGroup, RadioGroup, Radio, Button, DatetimePicker, Dialog } from 'vant'
+
+Vue.use(Dialog)
 
 Vue.use(DatetimePicker)
 Vue.use(Button)
@@ -136,17 +138,28 @@ export default {
       currentDate: new Date()
     }
   },
+  created () {
+    // const query = this.$route.query
+    // console.log(query)
+  },
   methods: {
     addHouse () {
-      this.$router.push({ name: 'RecommentAdd' })
+      const obj = {
+        name: this.send.name,
+        phone: this.send.phone,
+        sex: this.send.sex,
+        time: this.currentDate
+      }
+      this.$router.push({ name: 'RecommentAdd', query: obj })
     },
     selectTime (val, yo) {
-      console.log(typeof val)
+      // console.log(typeof val)
       this.showTime = false
 
       const lastV = this.dateFormat(val)
       this.timeDisplay = lastV
       console.log(lastV)
+      // console.log(this.currentDate)
     },
     dateFormat (data) {
       const d = new Date(data)

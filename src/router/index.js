@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 11:54:50
+ * @LastEditTime : 2020-05-27 09:24:51
  * @FilePath     : \agent\src\router\index.js
  * @Description  :
  */
@@ -29,7 +29,7 @@ const routes = [
       {
         path: '/home/recomment',
         name: 'Recomment',
-        meta: { index: 2, title: '推荐' },
+        meta: { index: 2, title: '推荐', keepAlive: true },
         component: () => import('../views/home/Recomment.vue')
       },
       {

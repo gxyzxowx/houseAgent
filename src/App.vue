@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 14:50:49
+ * @LastEditTime : 2020-05-26 15:28:12
  * @FilePath     : \agent\src\App.vue
  * @Description  :  入口
 -->
@@ -28,6 +28,8 @@
 export default {
   created () {
     // this.getCode()
+    const token = 'f083KKPVBLrTVhFfuA2l+m/TGhPJLr6vxz6eL+XR'
+    window.sessionStorage.setItem('token', token)
   },
   methods: {
     getCode () { // 非静默授权，第一次有弹框

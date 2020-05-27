@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:25:26
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 15:01:35
+ * @LastEditTime : 2020-05-26 16:38:07
  * @FilePath     : \agent\src\views\home\Hot.vue
  * @Description  : 首页-首页
 -->
@@ -162,7 +162,7 @@ header {
       <van-list
   v-model="loading"
   :finished="finished"
-  offset= 1
+  offset= 10
   finished-text="没有更多了"
   @load="getFloorList"
 >
@@ -270,13 +270,13 @@ export default {
     // 获取楼盘列表
     getFloorList () {
       this.page++
-      console.log(this.page)
+      // console.log(this.page)
       this.WR.post('/Floor_List/getFloorList', {
         page: this.page,
-        row: 1
+        row: 5
       })
         .then(rs => {
-          console.log(rs)
+          // console.log(rs)
           if (rs.code === 0) {
             this.dataList = this.dataList.concat(rs.data.data_list)
           }

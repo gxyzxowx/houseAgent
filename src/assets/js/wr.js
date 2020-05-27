@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 11:31:34
+ * @LastEditTime : 2020-05-26 17:14:06
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'
@@ -15,6 +15,11 @@ const obj = {
       axios.get(BASE_URL + url, {
         params: params
       }).then(res => {
+        if (res.code === 2) {
+          // 去登录
+          alert(res.message)
+          return
+        }
         resolve(res.data)
       }).catch(err => {
         reject(err.data)
@@ -25,6 +30,11 @@ const obj = {
     return new Promise((resolve, reject) => {
       axios.post(BASE_URL + url, QS.stringify(params))
         .then(res => {
+          if (res.code === 2) {
+            // 去登录
+            alert(res.message)
+            return
+          }
           resolve(res.data)
         })
         .catch(err => {
@@ -32,6 +42,12 @@ const obj = {
           reject(err.data)
         })
     })
+  },
+  // 验证手机号码是否正确
+  isMobile (mobile) {
+    var patrn = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+    if (!patrn.exec(mobile)) { return false }
+    return true
   }
 }
 export default obj
