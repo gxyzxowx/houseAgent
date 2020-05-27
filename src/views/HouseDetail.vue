@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:49:24
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 15:55:41
+ * @LastEditTime : 2020-05-27 16:14:28
  * @FilePath     : \agent\src\views\HouseDetail.vue
  * @Description  : 楼盘详情
 -->
@@ -162,7 +162,7 @@
         </div>
         <div class="text">收藏</div>
       </div>
-      <div class="recomment">我要推荐</div>
+      <div class="recomment" @click="linkToRecomment()">我要推荐</div>
     </footer>
   </div>
 </template>
@@ -232,6 +232,16 @@ export default {
             Toast(rs.message)
           }
         })
+    },
+    // 推荐该房
+    linkToRecomment () {
+      this.$router.push({
+        name: 'Recomment',
+        query: {
+          floor_id: this.query.floor_id,
+          floor_name: this.data.name
+        }
+      })
     }
   }
 }

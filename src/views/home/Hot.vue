@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:25:26
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 16:38:07
+ * @LastEditTime : 2020-05-27 16:19:01
  * @FilePath     : \agent\src\views\home\Hot.vue
  * @Description  : 首页-首页
 -->
@@ -12,7 +12,8 @@
   background-color: #f7f7f7;
 }
 .swiper {
-  @include rectBg(100%, 4.04rem, "../../assets/img/banner.png");
+   @include rect(100%, 4.04rem);
+  // @include rectBg(100%, 4.04rem, "../../assets/img/banner.png");
 }
 header {
   height: 4.04rem;
@@ -141,7 +142,7 @@ header {
         <div class="swiper">
           <div v-swiper:mySwiper="swiperOption">
             <div class="swiper-wrapper">
-              <div class="swiper-slide"  @click.stop="swiperGo(type, floor_id)" :key="index" v-for="(banner, index) in banner_list">
+              <div class="swiper-slide"  @click.stop="swiperGo(banner.type, banner.floor_id)" :key="index" v-for="(banner, index) in banner_list">
                 <img :src="banner.image"/>
               </div>
             </div>
@@ -199,8 +200,8 @@ export default {
   data () {
     return {
       images: [
-        'https://m.360buyimg.com/mobilecms/s750x366_jfs/t1/39343/4/1551/48272/5cbd71f4E329401dc/579b33f530a1402d.jpg!cr_1125x549_0_72!q70.jpg.dpg',
-        'https://m.360buyimg.com/mobilecms/s750x366_jfs/t1/34869/14/3703/113972/5cb953c1E4294d8ea/b73c538710f5c462.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+        // 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t1/39343/4/1551/48272/5cbd71f4E329401dc/579b33f530a1402d.jpg!cr_1125x549_0_72!q70.jpg.dpg',
+        // 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t1/34869/14/3703/113972/5cb953c1E4294d8ea/b73c538710f5c462.jpg!cr_1125x549_0_72!q70.jpg.dpg'
       ],
       swiperOption: {
         loop: true,

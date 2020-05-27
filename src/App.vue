@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 15:28:12
+ * @LastEditTime : 2020-05-27 11:00:37
  * @FilePath     : \agent\src\App.vue
  * @Description  :  入口
 -->
@@ -30,6 +30,7 @@ export default {
     // this.getCode()
     const token = 'f083KKPVBLrTVhFfuA2l+m/TGhPJLr6vxz6eL+XR'
     window.sessionStorage.setItem('token', token)
+    // this.getConfig()
   },
   methods: {
     getCode () { // 非静默授权，第一次有弹框
@@ -67,6 +68,9 @@ export default {
         const token = rs.token
         window.sessionStorage.setItem('token', token)
       })
+    },
+    getConfig () {
+
     }
   }
 }

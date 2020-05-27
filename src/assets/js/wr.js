@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 17:14:06
+ * @LastEditTime : 2020-05-27 10:36:00
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'

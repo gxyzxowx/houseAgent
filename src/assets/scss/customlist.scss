@@ -52,6 +52,9 @@ ul.customlist{
         display: flex;
         width: 1.5rem;
         justify-content: space-between;
+        .like.red{
+          color:$c-a;
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 09:24:51
+ * @LastEditTime : 2020-05-27 15:04:47
  * @FilePath     : \agent\src\router\index.js
  * @Description  :
  */
@@ -129,6 +129,13 @@ const routes = [
     name: 'MyStar',
     meta: { title: '我的收藏' },
     component: () => import('../views/MyStar.vue')
+  },
+  {
+    // 客户列表 -- 我的关注
+    path: '/home/user/mycustomstar',
+    name: 'MyCustomStar',
+    meta: { title: '我的关注' },
+    component: () => import('../views/MyCustomStar.vue')
   },
   {
     // 案场助理 -- 客户列表

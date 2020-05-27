@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 16:26:27
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-25 11:44:51
+ * @LastEditTime : 2020-05-27 15:55:09
  * @FilePath     : \agent\src\views\CustomDetail.vue
  * @Description  : 客户详情
 -->
@@ -27,6 +27,7 @@ header {
       }
     }
     .info {
+      text-align: start;
       @include font(0.32rem, #333);
       margin-left: 0.2rem;
       .name {
@@ -119,31 +120,31 @@ main {
   <div>
     <header>
       <div class="left">
-        <div class="pic">
+        <!-- <div class="pic">
           <img src alt />
-        </div>
+        </div> -->
         <div class="info">
-          <div class="name">曾迪迪（女）</div>
-          <div class="phone">13752852442</div>
+          <div class="name">客户： {{name}} （{{sex == 1? '女':'男'}}）</div>
+          <div class="phone">{{phone}}</div>
         </div>
       </div>
       <div class="right">
         <div class="icons">
           <van-icon name="edit" @click="linkToRecoment()" />
           <van-icon name="qr" @click="linkToSeeCode()" />
-          <van-icon name="phone-o" />
+          <van-icon name="phone-o" @click="onCall()"/>
         </div>
       </div>
     </header>
-    <div class="line">项目： 观音桥商贸中心</div>
+    <div class="line">项目： {{floor_name}}</div>
     <div class="current-status">
       <div class="baobei">
-        <van-icon name="checked"  class="icon active"/>
+        <van-icon name="checked" class="icon" :class="{active: business_status!=6}"/>
         <div class="text">报备</div>
       </div>
       <div class="mid-line"></div>
       <div class="chengjiao">
-        <van-icon name="checked"  class="icon"/>
+        <van-icon name="checked"  class="icon" :class="{active: business_status==5}"/>
         <div class="text">成交</div>
       </div>
     </div>
@@ -155,7 +156,7 @@ main {
       </div>
       <div class="com-line"></div>
       <ul class="list">
-        <li>
+        <!-- <li>
           <div class="top">
             <van-icon name="underway-o" size=".4rem" />
             <div class="time">2020-05-20 05:22:12</div>
@@ -166,18 +167,18 @@ main {
             <p>保护期：截止到2020-05-20 05:22:12</p>
             <p>已提交客户资料，开发商审核中。放截客锁定中，请耐心等待。</p>
           </div>
-        </li>
-        <li>
+        </li> -->
+        <li v-for="(item, index) in record_list" :key="index">
           <div class="top">
             <van-icon name="underway-o" size=".4rem" />
-            <div class="time">2020-05-20 05:22:12</div>
-            <div class="biao blue">报备</div>
+            <div class="time">{{item.create_time}}</div>
+            <div class="biao blue">{{item.content}}</div>
           </div>
-          <div class="bottom">
+          <!-- <div class="bottom">
             <span>审核中</span>
             <p>保护期：截止到2020-05-20 05:22:12</p>
             <p>已提交客户资料，开发商审核中。放截客锁定中，请耐心等待。</p>
-          </div>
+          </div> -->
         </li>
       </ul>
     </main>
@@ -190,13 +191,44 @@ import { Icon } from 'vant'
 Vue.use(Icon)
 export default {
   data () {
-    return {}
+    return {
+      token: window.sessionStorage.getItem('token'),
+      customer_id: '',
+      name: '',
+      phone: '',
+      sex: '',
+      business_status: '',
+      floor_name: '',
+      record_list: []
+    }
+  },
+  mounted () {
+    this.customer_id = this.$route.query.customer_id
+    console.log(this.$route.query)
+    this.getData()
   },
   methods: {
+    getData () {
+      this.WR.post('/User/getCustomerDetails', {
+        token: this.token,
+        customer_id: this.customer_id
+      }).then(rs => {
+        console.log(rs)
+        if (rs.code === 0) {
+          const data = rs.data
+          this.name = data.name
+          this.phone = data.phone
+          this.sex = data.sex
+          this.record_list = data.record_list
+        }
+      })
+    },
     linkToRecoment () {
       this.$router.push({
         name: 'Recomment',
-        query: 'abc'
+        query: {
+          customer_id: this.customer_id
+        }
       })
     },
     linkToSeeCode () {
@@ -204,6 +236,10 @@ export default {
         name: 'SeeCode',
         query: 'abc'
       })
+    },
+    onCall () {
+      console.log('打电话')
+      window.href = `tel:${this.phone}`
     }
   }
 }
