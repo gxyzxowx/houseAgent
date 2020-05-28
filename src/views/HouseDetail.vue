@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:49:24
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 11:00:44
+ * @LastEditTime : 2020-05-28 15:20:04
  * @FilePath     : \agent\src\views\HouseDetail.vue
  * @Description  : 楼盘详情
 -->
@@ -134,8 +134,10 @@
       <div class="house">
         <div class="top">
           <div class="title">{{data.name}}</div>
-          <div class="pic" @click="onCall()">
-            <van-icon class="icon" name="phone" />
+          <div class="pic">
+            <a :href="'tel'+data.phone">
+              <van-icon class="icon" name="phone" />
+            </a>
           </div>
         </div>
         <div class="bottom">
@@ -231,7 +233,7 @@ export default {
         })
     },
     onMap () {
-      window.location.href = `http://api.map.baidu.com/marker?location=${this.data.latitude},${this.data.longitude}`
+      window.location.href = `http://api.map.baidu.com/marker?location=${this.data.latitude},${this.data.longitude}&output=html`
     },
     onCall () {
       console.log('打电话')

@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 17:16:46
+ * @LastEditTime : 2020-05-28 12:38:04
  * @FilePath     : \agent\src\router\index.js
  * @Description  :
  */
@@ -16,7 +16,7 @@ VueRouter.prototype.push = function push (location) {
 }
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     children: [

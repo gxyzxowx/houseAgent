@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:21:31
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 16:45:16
+ * @LastEditTime : 2020-05-28 11:10:40
  * @FilePath     : \agent\src\views\Search.vue
  * @Description  : 首页 -- 搜索
 -->
@@ -103,9 +103,12 @@ export default {
     onCancel () {
       console.log(2)
     },
-    openHouseDetail () {
+    openHouseDetail (id) {
       this.$router.push({
-        name: 'HouseDetail'
+        name: 'HouseDetail',
+        query: {
+          floor_id: id
+        }
       })
     }
   }

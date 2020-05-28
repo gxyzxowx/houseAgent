@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:34
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 16:16:24
+ * @LastEditTime : 2020-05-28 17:01:31
  * @FilePath     : \agent\src\views\home\Recomment.vue
  * @Description  : 推荐客户
 -->
@@ -125,8 +125,8 @@
       </ul>
     </div>
 
-    <van-button type="info" class="wr-button" v-if="customer_id" @click="modifyCustom()">确认修改</van-button>
-    <van-button type="info" class="wr-button" v-else @click="sendData()">报备</van-button>
+    <van-button type="info" class="wr-button" v-if="customer_id" @click="modifyCustom()" v-show="!showTime">确认修改</van-button>
+    <van-button type="info" class="wr-button" v-else @click="sendData()"  v-show="!showTime">报备</van-button>
     <van-dialog v-model="showAdd" title="新增意向楼盘" show-cancel-button :showConfirmButton="false">
       <div class="recoment-add">
         <div class="search">

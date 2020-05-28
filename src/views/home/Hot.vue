@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:25:26
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 16:19:01
+ * @LastEditTime : 2020-05-28 14:57:11
  * @FilePath     : \agent\src\views\home\Hot.vue
  * @Description  : 首页-首页
 -->
@@ -94,17 +94,11 @@ header {
       flex-direction: column;
       align-items: center;
       .pic {
-        @include squareBg(1.06rem, "../../assets/img/receive.png");
+        @include squareBg(1.06rem, "../../assets/img/bot.png");
       }
       .text {
         @include font(0.24rem, #333);
         margin-top: 0.08rem;
-      }
-      &:nth-of-type(2) .pic {
-        background-image: url("../../assets/img/store.png");
-      }
-      &:nth-of-type(3) .pic {
-        background-image: url("../../assets/img/entry.png");
       }
     }
   }
@@ -223,10 +217,12 @@ export default {
       dataList: [],
       loading: false,
       finished: false,
-      page: 0
+      page: 0,
+      token: ''
     }
   },
   mounted () {
+    this.token = window.sessionStorage.getItem('token')
     this.getData()
     // this.getFloorList()
   },

@@ -1,13 +1,13 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 10:36:00
+ * @LastEditTime : 2020-05-28 14:39:53
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'
 import QS from 'qs'
-// const BASE_URL = 'http://fangchan.caimaomeng.com/index'
-const BASE_URL = '/agent'
+const BASE_URL = 'http://fangchan.caimaomeng.com/agent'
+// const BASE_URL = '/agent'
 const obj = {
   // 封装axios
   get (url, params) {
@@ -30,9 +30,9 @@ const obj = {
     return new Promise((resolve, reject) => {
       axios.post(BASE_URL + url, QS.stringify(params))
         .then(res => {
-          if (res.code === 2) {
+          if (res.data.code === 2) {
             // 去登录
-            alert(res.message)
+            alert(res.data.message)
             return
           }
           resolve(res.data)

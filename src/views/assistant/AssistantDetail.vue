@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-22 11:44:41
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 17:15:52
+ * @LastEditTime : 2020-05-28 11:41:28
  * @FilePath     : \agent\src\views\assistant\AssistantDetail.vue
  * @Description  : 案场助理详情页
 -->
@@ -100,14 +100,14 @@ footer {
         <div class="main-title">客户状态：</div>
         <div class="select">
           <van-dropdown-menu>
-            <van-dropdown-item v-model="value1" :options="option1" :disabled="data.report_status!=1" />
+            <van-dropdown-item v-model="value1" :options="option1" :disabled="data.business_status!=1" />
           </van-dropdown-menu>
         </div>
       </div>
     </main>
 
     <footer>
-      <van-button type="info" size="large" class="footer-btn" v-if="data.report_status==1" @click="saveStatus()">保存</van-button>
+      <van-button type="info" size="large" class="footer-btn" v-if="data.business_status==1" @click="saveStatus()">保存</van-button>
     </footer>
   </div>
 </template>
@@ -128,7 +128,7 @@ export default {
         { text: '到访', value: 1 }
       ],
       token: window.sessionStorage.getItem('token'),
-      customer_id: 4,
+      customer_id: '',
       data: {
         id: 4,
         name: '小欧',
@@ -149,6 +149,8 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$route.query)
+    this.customer_id = this.$route.query.customer_id
     this.getData()
   },
   methods: {

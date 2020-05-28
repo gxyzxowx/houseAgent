@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:55
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-26 17:23:14
+ * @LastEditTime : 2020-05-28 15:14:09
  * @FilePath     : \agent\src\views\home\User.vue
  * @Description  : 我的页面
 -->
@@ -179,7 +179,7 @@ export default {
         create_time: null,
         id: 1,
         master_uid: 0,
-        nickname: '庞',
+        nickname: '未登录成功',
         openid: '12123',
         phone: '',
         // 1是经纪人,
@@ -187,7 +187,7 @@ export default {
         role: 2,
         sex: 2
       },
-      token: window.sessionStorage.getItem('token'),
+      token: '',
       // 绑定手机号
       show: false,
       tel: '',
@@ -195,6 +195,7 @@ export default {
     }
   },
   mounted () {
+    this.token = window.sessionStorage.getItem('token')
     this.getData()
   },
   methods: {

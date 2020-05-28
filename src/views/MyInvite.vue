@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-21 15:43:06
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 11:07:00
+ * @LastEditTime : 2020-05-28 16:59:43
  * @FilePath     : \agent\src\views\MyInvite.vue
  * @Description  : 我的 -- 我的邀请
 -->
@@ -27,6 +27,9 @@
         border-radius: 50%;
         overflow: hidden;
         margin-right: .2rem;
+        img{
+          @include square(100%);
+        }
       }
     }
   }
