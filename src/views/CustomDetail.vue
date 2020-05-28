@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 16:26:27
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 15:55:09
+ * @LastEditTime : 2020-05-27 17:23:34
  * @FilePath     : \agent\src\views\CustomDetail.vue
  * @Description  : 客户详情
 -->
@@ -234,7 +234,9 @@ export default {
     linkToSeeCode () {
       this.$router.push({
         name: 'SeeCode',
-        query: 'abc'
+        query: {
+          customer_id: this.customer_id
+        }
       })
     },
     onCall () {

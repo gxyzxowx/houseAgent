@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 15:04:47
+ * @LastEditTime : 2020-05-27 17:16:46
  * @FilePath     : \agent\src\router\index.js
  * @Description  :
  */
@@ -141,14 +141,14 @@ const routes = [
     // 案场助理 -- 客户列表
     path: '/assistant/home',
     name: 'AssistantHome',
-    meta: { title: '我的收藏' },
+    meta: { title: '客户列表' },
     component: () => import('../views/assistant/AssistantHome.vue')
   },
   {
     // 案场助理 -- 客户详情
     path: '/assistant/detail',
     name: 'AssistantDetail',
-    meta: { title: '我的收藏' },
+    meta: { title: '详细信息' },
     component: () => import('../views/assistant/AssistantDetail.vue')
   }
 ]

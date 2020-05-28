@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-22 11:27:33
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-22 14:05:25
+ * @LastEditTime : 2020-05-27 18:00:35
  * @FilePath     : \agent\src\views\assistant\AssistantHome.vue
  * @Description  : 案场助理
 -->
@@ -37,7 +37,7 @@ main{
     <header>
       <div class="select">
         <van-dropdown-menu>
-          <van-dropdown-item v-model="houseVal" :options="option1" @change="changeHouse"/>
+          <van-dropdown-item v-model="floor_id" :options="option1" @change="changeHouse"/>
         </van-dropdown-menu>
       </div>
       <!-- <div class="title">{{house}}</div> -->
@@ -45,23 +45,23 @@ main{
     <main>
       <div class="main-title">客户信息</div>
       <ul class="customlist">
-        <li @click="openCustomDetail()">
+        <li v-for="(item, index) in list" :key="index" @click="openCustomDetail(item.customer_id)">
           <div class="top">
             <div class="left">
               <div class="title">
-                <span class="username">曾小迪</span>
-                <span class="phone">13752565231</span>
-                <span class="status">待确认</span>
+                <span class="username">{{item.name}}</span>
+                <span class="phone">{{item.phone}}</span>
+                <span class="status">{{item.report_status_name}}</span>
               </div>
-              <div class="house">观音桥中心城</div>
+              <div class="house">{{item.floor_name}}</div>
             </div>
-            <div class="right">报备</div>
+            <div class="right">{{item.business_status_name}}</div>
           </div>
           <div class="com-line"></div>
           <div class="bottom">
             <div class="left">
               <span>状态更新时间:</span>
-              <span>2020-05-20 12:11:52</span>
+              <span>{{item.update_time}}</span>
             </div>
             <div class="right">
               <!-- <van-icon name="like" size=".4rem"/> -->
@@ -83,27 +83,62 @@ Vue.use(Icon)
 export default {
   data () {
     return {
-      houseVal: 0,
+      floor_id: 0,
       option1: [
-        { text: '请选择楼盘', value: 0 },
-        { text: '观音桥商贸大厦', value: 1 },
-        { text: '解放碑商业大楼', value: 2 },
-        { text: '五里店区', value: 3 }
+        { text: '请选择楼盘', value: 0 }
+        // { text: '观音桥商贸大厦', value: 1 },
+        // { text: '解放碑商业大楼', value: 2 },
+        // { text: '五里店区', value: 3 }
       ],
-      house: ''
+      token: window.sessionStorage.getItem('token'),
+      house: '',
+      page: 0,
+      list: []
     }
   },
+  mounted () {
+    this.getData()
+  },
   methods: {
-    // 点击打开案场助理的客户详情
-    openCustomDetail () {
-      this.$router.push({
-        name: 'AssistantDetail',
-        query: 'abc'
+    getData () {
+      this.WR.post('/Floor_List/searchFloorList', {
+        keywords: ''
+      }).then(rs => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          rs.data.map((item, index) => {
+            this.option1.push({
+              text: item.name,
+              value: item.id
+            })
+          })
+        }
       })
     },
-    changeHouse (val, val1) {
-      console.log(val, val1)
-      this.house = val.name
+    // 点击打开案场助理的客户详情
+    openCustomDetail (id) {
+      this.$router.push({
+        name: 'AssistantDetail',
+        query: {
+          customer_id: id
+        }
+      })
+    },
+    changeHouse (val) {
+      console.log(val)
+      // this.house = val.name
+      this.page++
+      this.WR.post('/User/managerSearchCustomerList', {
+        token: this.token,
+        page: this.page,
+        row: 8,
+        floor_id: val
+      }).then(rs => {
+        console.log(rs)
+        if (rs.code === 0) {
+          this.list = rs.data.data_list
+        }
+      })
     }
   }
 }
