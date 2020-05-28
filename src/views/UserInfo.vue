@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:52:27
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-21 14:18:21
+ * @LastEditTime : 2020-05-28 10:49:09
  * @FilePath     : \agent\src\views\UserInfo.vue
  * @Description  : 个人信息
 -->
@@ -30,17 +30,17 @@
     <van-cell-group>
       <van-cell title="头像" class="username">
         <template #right-icon>
-          <div class="pic" @click="showPic=!showPic">
-            <img src="../assets/img/home11.png" alt />
+          <div class="pic">
+            <img :src="avatar" alt />
           </div>
         </template>
       </van-cell>
-      <van-cell title="姓名" :value="nameVal" is-link @click="showName = !showName"/>
-      <van-cell title="手机号码" value="内容" class="nolink" />
-      <van-cell title="性别" :value="sexVal" is-link @click="changeSex" />
-      <van-cell title="城市" :value="cityVal" is-link @click="showCity=!showCity" />
-      <van-cell title="邀请码" value="内容" class="nolink" />
-      <van-cell title="绑定上线" value="内容" class="nolink" />
+      <van-cell title="姓名" :value="nickname" is-link @click="showName = !showName"/>
+      <van-cell title="手机号码" :value="phone" class="nolink" />
+      <van-cell title="性别" :value="sex" is-link @click="changeSex" />
+      <!-- <van-cell title="城市" :value="cityVal" is-link @click="showCity=!showCity" /> -->
+      <!-- <van-cell title="邀请码" value="内容" class="nolink" /> -->
+      <van-cell title="绑定上线" :value="master_nickname" class="nolink" />
     </van-cell-group>
     <!-- 选择性别 -->
     <van-action-sheet
@@ -52,13 +52,13 @@
     />
 
     <!-- 选择城市 -->
-    <van-action-sheet v-model="showCity" title="请选择">
+    <!-- <van-action-sheet v-model="showCity" title="请选择">
   <div class="content">
         <van-area title="城市选择" :area-list="areaList"
     @confirm="selectCity"
     @cancel="onCancel" />
   </div>
-</van-action-sheet>
+</van-action-sheet> -->
 
 <!-- 填写姓名 -->
 <van-dialog v-model="showName" title="修改姓名" show-cancel-button @confirm="selectName">
@@ -83,9 +83,10 @@
 </template>
 <script>
 import Vue from 'vue'
-import { Cell, CellGroup, ActionSheet, Area, Dialog, Field, Uploader } from 'vant'
+import { Cell, CellGroup, ActionSheet, Area, Dialog, Field, Uploader, Toast } from 'vant'
 import areaList from '@/assets/js/area.js'
 
+Vue.use(Toast)
 Vue.use(Uploader)
 Vue.use(Field)
 Vue.use(Dialog)
@@ -96,11 +97,14 @@ Vue.use(CellGroup)
 export default {
   data () {
     return {
-
-      sexActions: [{ name: '男' }, { name: '女' }, { name: '保密' }],
-      sexVal: '暂无',
+      token: window.sessionStorage.getItem('token'),
+      sexActions: [{ name: '男' }, { name: '女' }],
+      sex: '暂无',
       cityVal: '暂无',
-      nameVal: '暂无',
+      nickname: '暂无',
+      phone: '暂无',
+      master_nickname: '',
+      avatar: '',
       fileList: [],
       name0: '',
       // 选择 弹窗显示
@@ -115,8 +119,42 @@ export default {
     this.areaList = areaList
   },
   mounted () {
+    this.getData()
   },
   methods: {
+    getData () {
+      this.WR.post('/User/getUserInfo', {
+        token: this.token
+      })
+        .then(rs => {
+          console.log(rs)
+          if (rs.code === 0) {
+            this.avatar = rs.data.avatar
+            this.sex = rs.data.sex === 1 ? '女' : '男'
+            this.phone = rs.data.phone
+            this.nickname = rs.data.nickname
+            this.master_nickname = rs.data.master_nickname
+          }
+        })
+    },
+    changeInfo (nickname, sex) {
+      console.log(nickname)
+      console.log(sex)
+      this.WR.post('/User/editUserInfo', {
+        token: this.token,
+        nickname: nickname,
+        sex: sex
+      })
+        .then(rs => {
+          console.log(rs)
+          if (rs.code === 0) {
+            Toast('修改成功')
+            this.getData()
+          } else {
+            Dialog({ message: rs.message })
+          }
+        })
+    },
     // 点击取消（共用）
     onCancel () {
       this.showSex = false
@@ -129,7 +167,9 @@ export default {
     selectSex (val, index) {
       // console.log(val, as)
       this.showSex = false
-      this.sexVal = val.name
+      this.sex = val.name
+      const sex = this.sex === '女' ? 1 : 2
+      this.changeInfo('', sex)
       // 发送给后台
     },
     // 城市--选择城市
@@ -141,8 +181,9 @@ export default {
     },
     // 姓名 填写后确认
     selectName (val, ty) {
-      console.log(val, ty)
-      this.nameVal = this.name0
+      // console.log(val, ty)
+      this.nickname = this.name0
+      this.changeInfo(this.nickname, '')
     },
     // 图片本地获取
     handleFileChange (file) {

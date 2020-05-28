@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:49:24
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 16:14:28
+ * @LastEditTime : 2020-05-28 11:00:44
  * @FilePath     : \agent\src\views\HouseDetail.vue
  * @Description  : 楼盘详情
 -->
@@ -113,6 +113,19 @@
       background: $c;
     }
   }
+  .van-popup--center{
+    background-color: rgba(0,0,0,0);
+    }
+    .share1{
+      @include rectBg(5rem, 2.55rem, '~@/assets/img/share1.png');
+    margin-bottom: 5rem;
+        margin-left: 1rem;
+    }
+    .share2{
+      margin: 0 auto;
+      @include rectBg(2.55rem, 1.57rem, '~@/assets/img/share2.png');
+    }
+
 </style>
 <template>
   <div>
@@ -150,7 +163,7 @@
       </div>
     </main>
     <footer>
-      <div class="share">
+      <div class="share" @click="showShare=true">
         <div class="pic">
           <van-icon name="share"/>
         </div>
@@ -164,12 +177,18 @@
       </div>
       <div class="recomment" @click="linkToRecomment()">我要推荐</div>
     </footer>
+    <van-popup v-model="showShare" @click="showShare=false">
+
+      <div class="share1"></div>
+      <div class="share2"></div>
+      </van-popup>
   </div>
 </template>
 <script>
 import Vue from 'vue'
-import { Icon, Toast } from 'vant'
+import { Icon, Toast, Popup } from 'vant'
 
+Vue.use(Popup)
 Vue.use(Toast)
 Vue.use(Icon)
 export default {
@@ -189,8 +208,8 @@ export default {
         // price: '864000.00',
         // // 是否被收藏过了  0没 1是
         // is_collect: 0
-      }
-
+      },
+      showShare: false
     }
   },
   mounted () {
