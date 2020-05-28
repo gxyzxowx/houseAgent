@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 16:53:17
+ * @LastEditTime : 2020-05-28 17:05:02
  * @FilePath     : \agent\src\App.vue
  * @Description  :  入口
 -->
@@ -34,8 +34,6 @@ export default {
   },
   created () {
     this.getCode()
-    // const test = this.getMasterUid()
-    // console.log(test)
     // 测试
     // const token = '87d6eq24jAukAM2f3OXQUCfZFHBXrVDO/XVtyFM+UA'
     // window.sessionStorage.setItem('token', token)
@@ -58,13 +56,13 @@ export default {
       }
     },
     getLinkWXUrl (local) {
-      alert('window.location：' + JSON.stringify(window.location))
-      alert('master_uid：' + this.master_uid)
+      // alert('window.location：' + JSON.stringify(window.location))
+      // alert('master_uid：' + this.master_uid)
       this.WR.post('/Login/getRedirectUrl', {
         url: local,
         master_uid: this.master_uid
       }, this).then((rs) => {
-        alert(JSON.stringify(rs.data.redirect_url))
+        // alert(JSON.stringify(rs.data.redirect_url))
         if (rs.code === 0) {
           window.location.href = rs.data.redirect_url
         }
@@ -84,7 +82,7 @@ export default {
       return theRequest
     },
     getToken () {
-      alert('master_uid：' + this.master_uid)
+      // alert('master_uid：' + this.master_uid)
       this.WR.post('/Login/getCode', {
         code: this.code,
         master_uid: this.master_uid

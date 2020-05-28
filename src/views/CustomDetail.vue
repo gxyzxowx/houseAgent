@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 16:26:27
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 15:25:18
+ * @LastEditTime : 2020-05-28 17:07:59
  * @FilePath     : \agent\src\views\CustomDetail.vue
  * @Description  : 客户详情
 -->
@@ -132,7 +132,7 @@ main {
         <div class="icons">
           <van-icon name="edit" @click="linkToRecoment()" />
           <van-icon name="qr" @click="linkToSeeCode()" />
-          <a :href="'tel'+ phone">
+          <a :href="'tel:'+ phone">
               <van-icon name="phone-o" class="icon"/>
             </a>
         </div>

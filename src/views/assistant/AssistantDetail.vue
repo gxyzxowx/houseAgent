@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-22 11:44:41
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 11:41:28
+ * @LastEditTime : 2020-05-28 17:29:07
  * @FilePath     : \agent\src\views\assistant\AssistantDetail.vue
  * @Description  : 案场助理详情页
 -->
@@ -130,21 +130,21 @@ export default {
       token: window.sessionStorage.getItem('token'),
       customer_id: '',
       data: {
-        id: 4,
-        name: '小欧',
-        sex: 1,
-        visiting_time: 2147483647,
-        floor_id: 2,
-        phone: '13666666666',
-        business_status: 1,
-        report_status: 1,
-        uid: 1,
-        create_time: 1590544976,
-        update_time: 1590544976,
-        nickname: '庞',
-        user_phone: '',
-        avatar: '',
-        business_status_name: '已报备'
+        // id: 4,
+        // name: '小欧',
+        // sex: 1,
+        // visiting_time: 2147483647,
+        // floor_id: 2,
+        // phone: '13666666666',
+        // business_status: 1,
+        // report_status: 1,
+        // uid: 1,
+        // create_time: 1590544976,
+        // update_time: 1590544976,
+        // nickname: '庞',
+        // user_phone: '',
+        // avatar: '',
+        // business_status_name: '已报备'
       }
     }
   },

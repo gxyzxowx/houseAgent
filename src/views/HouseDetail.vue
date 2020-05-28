@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 17:49:24
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 15:20:04
+ * @LastEditTime : 2020-05-28 17:06:32
  * @FilePath     : \agent\src\views\HouseDetail.vue
  * @Description  : 楼盘详情
 -->
@@ -135,7 +135,7 @@
         <div class="top">
           <div class="title">{{data.name}}</div>
           <div class="pic">
-            <a :href="'tel'+data.phone">
+            <a :href="'tel:'+data.phone">
               <van-icon class="icon" name="phone" />
             </a>
           </div>

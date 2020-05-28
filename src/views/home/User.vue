@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:55
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 15:14:09
+ * @LastEditTime : 2020-05-28 17:28:44
  * @FilePath     : \agent\src\views\home\User.vue
  * @Description  : 我的页面
 -->
@@ -274,6 +274,7 @@ export default {
           console.log(rs)
           if (rs.code === 0) {
             Dialog({ message: rs.message })
+            this.getData()
           } else {
             Dialog({ message: rs.message })
           }
