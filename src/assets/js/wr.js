@@ -1,7 +1,7 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 17:41:25
+ * @LastEditTime : 2020-05-29 11:20:31
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'
@@ -15,9 +15,10 @@ const obj = {
       axios.get(BASE_URL + url, {
         params: params
       }).then(res => {
-        if (res.code === 2) {
+        if (res.data.code === 2) {
           // 去登录
-          alert(res.message)
+          alert(res.data.message)
+          obj.getLinkWXUrl()
           return
         }
         resolve(res.data)
@@ -33,7 +34,7 @@ const obj = {
           if (res.data.code === 2) {
             // 去登录
             alert(res.data.message)
-            this.getLinkWXUrl()
+            obj.getLinkWXUrl()
             return
           }
           resolve(res.data)
@@ -51,8 +52,10 @@ const obj = {
     return true
   },
   getLinkWXUrl () {
+    // alert('去请求getRedirectUrl')
     let url, customerId
-    if (this.$route.name === 'AssistantDetail') {
+    const local = window.location.href
+    if (local.indexOf('customer_id') !== -1) {
       // 是案场助理详情页（扫码去的）
       url = '/assistant/detail'
       const hashname = window.location.hash
@@ -61,17 +64,15 @@ const obj = {
     } else {
       url = window.location.href
     }
-    alert(this.$route.name)
-    alert('url：' + url)
-    alert('customer_id：' + customerId)
-    this.WR.post('/Login/getRedirectUrl', {
+    obj.post('/Login/getRedirectUrl', {
       url: url,
       customer_id: customerId
-
-    }, this).then((rs) => {
-      // alert(JSON.stringify(rs.data.redirect_url))
+    }).then((rs) => {
+      // alert(JSON.stringify(rs.data))
       if (rs.code === 0) {
         window.location.href = rs.data.redirect_url
+      } else {
+        alert(rs.message)
       }
     })
   }
