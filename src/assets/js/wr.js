@@ -1,13 +1,15 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-29 11:20:31
+ * @LastEditTime : 2020-05-29 14:02:25
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'
 import QS from 'qs'
-const BASE_URL = 'http://fangchan.caimaomeng.com/agent'
-// const BASE_URL = '/agent'
+// 生产环境
+// const BASE_URL = 'http://fangchan.caimaomeng.com/agent'
+// 开发环境
+const BASE_URL = '/agent'
 const obj = {
   // 封装axios
   get (url, params) {
@@ -52,7 +54,7 @@ const obj = {
     return true
   },
   getLinkWXUrl () {
-    // alert('去请求getRedirectUrl')
+    // alert(window.location.href)
     let url, customerId
     const local = window.location.href
     if (local.indexOf('customer_id') !== -1) {
@@ -64,9 +66,11 @@ const obj = {
     } else {
       url = window.location.href
     }
+    // alert('参数url:' + url)
+    // alert('参数customer_id:' + customerId)
     obj.post('/Login/getRedirectUrl', {
       url: url,
-      customer_id: customerId
+      customer_id: customerId || ''
     }).then((rs) => {
       // alert(JSON.stringify(rs.data))
       if (rs.code === 0) {

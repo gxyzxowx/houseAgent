@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-21 14:20:14
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 10:34:48
+ * @LastEditTime : 2020-05-29 14:39:17
  * @FilePath     : \agent\src\views\Setting.vue
  * @Description  : 我的 -- 设置
 -->
@@ -81,6 +81,7 @@ export default {
           console.log(rs)
           if (rs.code === 0) {
             Dialog({ message: '发送成功！' })
+            this.showsms = false
           }
         })
     },

@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:34
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 17:01:31
+ * @LastEditTime : 2020-05-29 14:36:26
  * @FilePath     : \agent\src\views\home\Recomment.vue
  * @Description  : 推荐客户
 -->
@@ -82,6 +82,8 @@
           placeholder="请输入用户名"
           label="姓名"
           right-icon="smile-o"
+          @focus="showBtn=false"
+          @blur="showBtn=true"
         />
 
         <!-- 性别： -->
@@ -94,13 +96,14 @@
           </template>
         </van-field>
 
-        <van-field v-model="send.phone" required type="tel" label="手机号" />
+        <van-field v-model="send.phone" required type="tel" label="手机号" @focus="showBtn=false" @blur="showBtn=true"/>
 
         <van-field
           v-model="timeDisplay"
           placeholder="请选择预计到访时间"
           label=" 预计到访时间"
-          @click.stop="showTime = !showTime"
+          @click.stop="showTime = !showTime,showBtn=false"
+          :readonly ='true'
         />
       </van-cell-group>
     </div>
@@ -110,7 +113,7 @@
       type="datetime"
       title="精确到小时"
       @confirm="selectTime"
-      @cancel="showTime = false"
+      @cancel="showTime = false,showBtn=true"
     />
     <div class="bottom">
       <div class="title">
@@ -125,8 +128,8 @@
       </ul>
     </div>
 
-    <van-button type="info" class="wr-button" v-if="customer_id" @click="modifyCustom()" v-show="!showTime">确认修改</van-button>
-    <van-button type="info" class="wr-button" v-else @click="sendData()"  v-show="!showTime">报备</van-button>
+    <van-button type="info" class="wr-button" v-if="customer_id" @click="modifyCustom()" v-show="showBtn">确认修改</van-button>
+    <van-button type="info" class="wr-button" v-else @click="sendData()"  v-show="showBtn">报备</van-button>
     <van-dialog v-model="showAdd" title="新增意向楼盘" show-cancel-button :showConfirmButton="false">
       <div class="recoment-add">
         <div class="search">
@@ -204,7 +207,9 @@ export default {
       // 主页显示意向楼盘列表
       addList: [],
       // 修改客户信息参数
-      customer_id: undefined
+      customer_id: undefined,
+      // 显示按钮
+      showBtn: true
     }
   },
   created () {
@@ -226,11 +231,12 @@ export default {
   methods: {
     addHouse () {
       this.showAdd = true
+      this.onSearch()
     },
     selectTime (val, yo) {
       // console.log(typeof val)
       this.showTime = false
-
+      this.showBtn = true
       const lastV = this.dateFormat(val)
       this.timeDisplay = lastV
       console.log(lastV)
@@ -291,7 +297,7 @@ export default {
     onSearch (val) {
       console.log('你点击了搜索:' + val)
       this.WR.post('/Floor_List/searchFloorList', {
-        keywords: val
+        keywords: val || ''
       }).then(rs => {
         // console.log(rs)
         if (rs.code === 0) {

@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 11:36:55
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-28 17:28:44
+ * @LastEditTime : 2020-05-29 14:40:16
  * @FilePath     : \agent\src\views\home\User.vue
  * @Description  : 我的页面
 -->
@@ -158,7 +158,7 @@
   placeholder="请输入短信验证码"
 >
   <template #button>
-    <van-button size="small" type="primary" @click="sendSms()">发送验证码</van-button>
+    <van-button size="small" type="primary" @click="sendSms()" v-show="showsms">发送验证码</van-button>
   </template>
 </van-field>
 </van-dialog>
@@ -191,7 +191,9 @@ export default {
       // 绑定手机号
       show: false,
       tel: '',
-      sms: ''
+      sms: '',
+      // 显示发送验证码按钮
+      showsms: true
     }
   },
   mounted () {
@@ -251,6 +253,7 @@ export default {
           console.log(rs)
           if (rs.code === 0) {
             Dialog({ message: '发送成功！' })
+            this.showsms = false
           }
         })
     },

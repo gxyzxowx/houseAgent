@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-20 14:54:10
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 15:59:53
+ * @LastEditTime : 2020-05-29 14:09:00
  * @FilePath     : \agent\src\views\MyCustom.vue
  * @Description  : 我的客户
 -->
@@ -38,6 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
   form{
     flex: 1;
   }

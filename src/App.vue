@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-29 11:11:36
+ * @LastEditTime : 2020-05-29 14:28:03
  * @FilePath     : \agent\src\App.vue
  * @Description  :  入口
 -->
@@ -19,6 +19,8 @@
   text-align: center;
   color: #333;
    height:100vh;
+   margin: 0;
+   padding: 0;
   background: #f7f7f7;
   // font-size: .24rem;
 }
@@ -33,10 +35,11 @@ export default {
     }
   },
   created () {
-    this.getCode()
+    // this.getCode()
     // 测试
-    // const token = '87d6eq24jAukAM2f3OXQUCfZFHBXrVDO/XVtyFM+UA'
-    // window.sessionStorage.setItem('token', token)
+    const token = 'ed2024TtGulriZ+IQrePpBy/sl/sJELGLFFPntrIWA'
+    window.sessionStorage.setItem('token', token)
+    this.$router.push({ name: 'Hot' })
     // 测试完毕
   },
   methods: {
@@ -76,7 +79,7 @@ export default {
         if (rs.code === 0) {
           const token = rs.data.token
           window.sessionStorage.setItem('token', token)
-          if (window.location.href.indexOf('customer_id')) {
+          if (window.location.href.indexOf('customer_id') !== -1) {
             const index0 = window.location.hash.indexOf('=')
             const customerId = window.location.hash.slice(index0 + 1)
             this.$router.push({
