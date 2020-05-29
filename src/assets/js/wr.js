@@ -1,15 +1,15 @@
 /*
  * @Date         : 2020-04-30 10:41:48
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-29 14:02:25
+ * @LastEditTime : 2020-05-29 17:49:45
  * @FilePath     : \agent\src\assets\js\wr.js
  */
 import axios from 'axios'
 import QS from 'qs'
 // 生产环境
-// const BASE_URL = 'http://fangchan.caimaomeng.com/agent'
+const BASE_URL = 'http://fangchan.caimaomeng.com/agent'
 // 开发环境
-const BASE_URL = '/agent'
+// const BASE_URL = '/agent'
 const obj = {
   // 封装axios
   get (url, params) {
@@ -55,14 +55,18 @@ const obj = {
   },
   getLinkWXUrl () {
     // alert(window.location.href)
-    let url, customerId
+    let url, customerId, masterUid
+    const hashname = window.location.hash
     const local = window.location.href
     if (local.indexOf('customer_id') !== -1) {
       // 是案场助理详情页（扫码去的）
       url = '/assistant/detail'
-      const hashname = window.location.hash
       const index0 = hashname.indexOf('=')
       customerId = hashname.slice(index0 + 1)
+    } else if (local.indexOf('master_uid') !== -1) {
+      // 是邀请经纪人
+      const index0 = hashname.indexOf('=')
+      masterUid = hashname.slice(index0 + 1)
     } else {
       url = window.location.href
     }
@@ -70,7 +74,8 @@ const obj = {
     // alert('参数customer_id:' + customerId)
     obj.post('/Login/getRedirectUrl', {
       url: url,
-      customer_id: customerId || ''
+      customer_id: customerId || '',
+      master_uid: masterUid || ''
     }).then((rs) => {
       // alert(JSON.stringify(rs.data))
       if (rs.code === 0) {

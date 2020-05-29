@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-19 10:23:53
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-29 14:28:03
+ * @LastEditTime : 2020-05-29 17:48:27
  * @FilePath     : \agent\src\App.vue
  * @Description  :  入口
 -->
@@ -35,11 +35,11 @@ export default {
     }
   },
   created () {
-    // this.getCode()
+    this.getCode()
     // 测试
-    const token = 'ed2024TtGulriZ+IQrePpBy/sl/sJELGLFFPntrIWA'
-    window.sessionStorage.setItem('token', token)
-    this.$router.push({ name: 'Hot' })
+    // const token = 'ed2024TtGulriZ+IQrePpBy/sl/sJELGLFFPntrIWA'
+    // window.sessionStorage.setItem('token', token)
+    // this.$router.push({ name: 'Hot' })
     // 测试完毕
   },
   methods: {
@@ -71,10 +71,9 @@ export default {
       return theRequest
     },
     getToken () {
-      // alert('master_uid：' + this.master_uid)
       this.WR.post('/Login/getCode', {
         code: this.code,
-        master_uid: this.master_uid
+        master_uid: this.master_uid || ''
       }, this).then((rs) => {
         if (rs.code === 0) {
           const token = rs.data.token
@@ -96,11 +95,10 @@ export default {
     },
     getMasterUid () {
       const hashname = window.location.hash
-      // console.log(hashname)
-      // console.log(hashname.slice(3, 13))
-      if (hashname.slice(3, 13) === 'master_uid') {
+      if (window.location.href.indexOf('master_uid') !== -1) {
         const index0 = hashname.indexOf('=')
         const lastV = hashname.slice(index0 + 1)
+
         return lastV
       } else {
         return ''

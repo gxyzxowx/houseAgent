@@ -1,7 +1,7 @@
 <!--
  * @Date         : 2020-05-22 11:27:33
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-27 18:00:35
+ * @LastEditTime : 2020-05-29 17:23:42
  * @FilePath     : \agent\src\views\assistant\AssistantHome.vue
  * @Description  : 案场助理
 -->
@@ -127,16 +127,19 @@ export default {
     changeHouse (val) {
       console.log(val)
       // this.house = val.name
-      this.page++
+      this.page = 1
+      console.log('token：' + this.token)
       this.WR.post('/User/managerSearchCustomerList', {
         token: this.token,
         page: this.page,
-        row: 8,
+        row: 10,
         floor_id: val
       }).then(rs => {
         console.log(rs)
         if (rs.code === 0) {
           this.list = rs.data.data_list
+        } else {
+          alert(rs.message)
         }
       })
     }

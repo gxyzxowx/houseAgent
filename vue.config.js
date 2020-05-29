@@ -1,22 +1,22 @@
 /*
  * @Date         : 2019-12-11 16:50:10
  * @LastEditors  : 曾迪
- * @LastEditTime : 2020-05-29 14:01:56
+ * @LastEditTime : 2020-05-29 17:27:49
  * @FilePath     : \agent\vue.config.js
  */
 module.exports = {
-  devServer: {
-    proxy: {
-      '/agent': {
-        target: 'http://fangchan.caimaomeng.com/agent',
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-          '^/agent': ''
-        }
-      }
-    }
-  },
+  // devServer: {
+  //   proxy: {
+  //     '/agent': {
+  //       target: 'http://fangchan.caimaomeng.com/agent',
+  //       changeOrigin: true,
+  //       ws: true,
+  //       pathRewrite: {
+  //         '^/agent': ''
+  //       }
+  //     }
+  //   }
+  // },
   // 解决scss文件全局引入的问题
   chainWebpack: config => {
     const oneOfsMap = config.module.rule('scss').oneOfs.store
